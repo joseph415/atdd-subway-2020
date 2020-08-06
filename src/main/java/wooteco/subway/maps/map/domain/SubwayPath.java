@@ -34,6 +34,6 @@ public class SubwayPath {
     }
 
     public double calculateFare() {
-        return 0;
+        return 1250d;
     }
 }
