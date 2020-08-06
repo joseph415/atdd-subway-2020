@@ -35,10 +35,10 @@ class SubwayPathTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"0,1250", "500,1750", "900,2150"})
-    void 추가_요금이_있는_노선별_거리에_따른_요금을_계산하는_기능(int highestFare, int expected) {
+    @CsvSource(value = {"6,450", "15,720", "30,1250"})
+    void 추가_요금이_있는_노선별_거리와_나이에_따른_요금을_계산하는_기능(int age, int expected) {
         int distance = subwayPath.calculateDistance();
 
-        assertThat(subwayPath.calculateFare(distance, highestFare)).isEqualTo(expected);
+        assertThat(subwayPath.calculateFare(distance, 0, age)).isEqualTo(expected);
     }
 }

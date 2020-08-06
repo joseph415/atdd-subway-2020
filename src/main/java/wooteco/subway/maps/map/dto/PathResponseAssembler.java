@@ -10,13 +10,13 @@ import wooteco.subway.maps.station.dto.StationResponse;
 
 public class PathResponseAssembler {
     public static PathResponse assemble(SubwayPath subwayPath, Map<Long, Station> stations,
-            int highestExtraFare) {
+            int highestExtraFare, int age) {
         List<StationResponse> stationResponses = subwayPath.extractStationId().stream()
                 .map(it -> StationResponse.of(stations.get(it)))
                 .collect(Collectors.toList());
 
         int distance = subwayPath.calculateDistance();
-        int fare = subwayPath.calculateFare(distance, highestExtraFare);
+        int fare = subwayPath.calculateFare(distance, highestExtraFare, age);
 
         return new PathResponse(stationResponses, subwayPath.calculateDuration(), distance, fare);
     }

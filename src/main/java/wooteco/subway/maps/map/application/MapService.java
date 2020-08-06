@@ -55,7 +55,7 @@ public class MapService {
                 .max()
                 .orElseGet(() -> 0);
 
-        return PathResponseAssembler.assemble(subwayPath, stations, highestExtraFare);
+        return PathResponseAssembler.assemble(subwayPath, stations, highestExtraFare, age);
     }
 
     private Map<Long, Station> findStations(List<Line> lines) {
