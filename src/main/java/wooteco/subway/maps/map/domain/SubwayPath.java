@@ -7,6 +7,9 @@ import com.google.common.collect.Lists;
 
 public class SubwayPath {
     private static final double STANDARD_FARE = 1250d;
+    private static final int TEN_OVER_DISTANCE_UNIT = 10;
+    private static final int FIFTY_OVER_DISTANCE_UNIT = 50;
+
     private List<LineStationEdge> lineStationEdges;
 
     public SubwayPath(List<LineStationEdge> lineStationEdges) {
@@ -40,13 +43,32 @@ public class SubwayPath {
     }
 
     private int calculateOverFare(int distance) {
-        if (distance == 0) {
+        if (distance <= TEN_OVER_DISTANCE_UNIT) {
             return 0;
         }
-        return (int)((Math.ceil(additionalFareUnitBy(distance))) * 100);
+
+        if (distance < FIFTY_OVER_DISTANCE_UNIT) {
+            return (int)((Math.ceil(additionalFareRateUnitBy(distance, false))) * 100);
+        }
+
+        int overfare = 0;
+
+        if (distance > FIFTY_OVER_DISTANCE_UNIT) {
+            overfare += (int)((Math.ceil(additionalFareRateUnitBy(FIFTY_OVER_DISTANCE_UNIT, false)))
+                    * 100);
+
+            distance -= FIFTY_OVER_DISTANCE_UNIT;
+            overfare += (int)((Math.ceil(additionalFareRateUnitBy(distance, true))) * 100);
+        }
+
+        return overfare;
     }
 
-    private int additionalFareUnitBy(int distance) {
-        return ((distance - 1) / 5) + 1;
+    private int additionalFareRateUnitBy(int distance, boolean overFifty) {
+        if (!overFifty) {
+            distance -= TEN_OVER_DISTANCE_UNIT;
+            return ((distance - 1) / 5) + 1;
+        }
+        return ((distance - 1) / 8) + 1;
     }
 }

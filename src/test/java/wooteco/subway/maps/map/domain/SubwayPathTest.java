@@ -22,7 +22,7 @@ class SubwayPathTest {
         line3 = TestObjectUtils.createLine(3L, "3호선", "ORANGE");
         line3.addLineStation(new LineStation(1L, null, 0, 0));
         LineStation lineStation6 = new LineStation(4L, 1L, 1, 2);
-        LineStation lineStation7 = new LineStation(3L, 4L, 10, 2);
+        LineStation lineStation7 = new LineStation(3L, 4L, 50, 2);
         line3.addLineStation(lineStation6);
         line3.addLineStation(lineStation7);
 
@@ -37,6 +37,6 @@ class SubwayPathTest {
     void 거리에_따른_요금을_계산하는_기능() {
         int distance = subwayPath.calculateDistance();
 
-        assertThat(subwayPath.calculateFare(distance)).isEqualTo(1550d);
+        assertThat(subwayPath.calculateFare(distance)).isEqualTo(2150d);
     }
 }
