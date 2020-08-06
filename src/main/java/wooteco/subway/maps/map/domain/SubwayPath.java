@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import com.google.common.collect.Lists;
 
 public class SubwayPath {
-    private static final double STANDARD_FARE = 1250d;
+    private static final int STANDARD_FARE = 1250;
     private static final int TEN_OVER_DISTANCE_UNIT = 10;
     private static final int FIFTY_OVER_DISTANCE_UNIT = 50;
 
@@ -38,8 +38,13 @@ public class SubwayPath {
         return lineStationEdges.stream().mapToInt(it -> it.getLineStation().getDistance()).sum();
     }
 
-    public double calculateFare(int distance) {
-        return STANDARD_FARE + calculateOverFare(distance);
+    public int calculateFare(int distance, int highestExtraFare) {
+        int fare = STANDARD_FARE + calculateOverFare(distance);
+
+        if (highestExtraFare > 0) {
+            return fare + highestExtraFare;
+        }
+        return fare;
     }
 
     private int calculateOverFare(int distance) {

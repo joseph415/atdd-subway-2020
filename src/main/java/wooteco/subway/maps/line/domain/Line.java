@@ -85,6 +85,10 @@ public class Line extends BaseEntity {
         return intervalTime;
     }
 
+    public int getExtraFare() {
+        return extraFare;
+    }
+
     public LineStations getLineStations() {
         return lineStations;
     }
