@@ -64,7 +64,7 @@ public class PathDocumentation extends Documentation {
                         StationResponse.mockResponse(station4)),
                 11, 4, 1350d);
 
-        when(mapService.findPath(1L, 3L, DISTANCE)).thenReturn(pathResponse);
+        when(mapService.findPath(1L, 3L, DISTANCE, 15)).thenReturn(pathResponse);
 
         given().log().all().
                 param("source", 1L).
