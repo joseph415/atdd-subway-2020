@@ -18,7 +18,6 @@ import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.web.context.WebApplicationContext;
 
-import wooteco.security.core.TokenResponse;
 import wooteco.subway.common.TestObjectUtils;
 import wooteco.subway.common.documentation.Documentation;
 import wooteco.subway.maps.line.domain.Line;
@@ -39,20 +38,26 @@ public class PathDocumentation extends Documentation {
     @MockBean
     private MapService mapService;
 
-    protected TokenResponse tokenResponse;
+    private Station station1;
+    private Station station2;
+    private Station station3;
+    private Station station4;
 
     @BeforeEach
     public void setUp(
             WebApplicationContext context, RestDocumentationContextProvider restDocumentation) {
         super.setUp(context, restDocumentation);
-        tokenResponse = new TokenResponse("token");
+        station1 = TestObjectUtils.createStation(1L, "교대역");
+        station2 = TestObjectUtils.createStation(2L, "강남역역");
+        station3 = TestObjectUtils.createStation(3L, "양재역");
+        station4 = TestObjectUtils.createStation(4L, "남부터미널역");
     }
 
     @Test
     void findPath() {
-        Station station1 = TestObjectUtils.createStation(1L, "교대역");
-        Station station3 = TestObjectUtils.createStation(3L, "양재역");
-        Station station4 = TestObjectUtils.createStation(4L, "남부터미널역");
+        station1 = TestObjectUtils.createStation(1L, "교대역");
+        station3 = TestObjectUtils.createStation(3L, "양재역");
+        station4 = TestObjectUtils.createStation(4L, "남부터미널역");
         PathResponse pathResponse = new PathResponse(
                 Arrays.asList(StationResponse.mockResponse(station1),
                         StationResponse.mockResponse(station3),
@@ -99,20 +104,20 @@ public class PathDocumentation extends Documentation {
 
     @Test
     void findMap() {
-        Station station1 = TestObjectUtils.createStation(1L, "교대역");
-        Station station2 = TestObjectUtils.createStation(2L, "강남역역");
-        Station station3 = TestObjectUtils.createStation(3L, "양재역");
-        Station station4 = TestObjectUtils.createStation(4L, "남부터미널역");
+        station1 = TestObjectUtils.createStation(1L, "교대역");
+        station2 = TestObjectUtils.createStation(2L, "강남역역");
+        station3 = TestObjectUtils.createStation(3L, "양재역");
+        station4 = TestObjectUtils.createStation(4L, "남부터미널역");
 
-        Line line1 = TestObjectUtils.createLine(1L, "2호선", "GREEN");
+        Line line1 = TestObjectUtils.createLine(1L, "2호선", "GREEN", 0);
         line1.addLineStation(new LineStation(1L, null, 0, 0));
         line1.addLineStation(new LineStation(2L, 1L, 2, 2));
 
-        Line line2 = TestObjectUtils.createLine(2L, "신분당선", "RED");
+        Line line2 = TestObjectUtils.createLine(2L, "신분당선", "RED", 500);
         line2.addLineStation(new LineStation(2L, null, 0, 0));
         line2.addLineStation(new LineStation(3L, 2L, 2, 1));
 
-        Line line3 = TestObjectUtils.createLine(3L, "3호선", "ORANGE");
+        Line line3 = TestObjectUtils.createLine(3L, "3호선", "ORANGE", 900);
         line3.addLineStation(new LineStation(1L, null, 0, 0));
         line3.addLineStation(new LineStation(4L, 1L, 1, 2));
         line3.addLineStation(new LineStation(3L, 4L, 2, 2));

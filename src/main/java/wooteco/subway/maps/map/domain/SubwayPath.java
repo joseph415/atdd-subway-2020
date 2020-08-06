@@ -43,23 +43,19 @@ public class SubwayPath {
     }
 
     private int calculateOverFare(int distance) {
+        int overfare = 0;
+
         if (distance <= TEN_OVER_DISTANCE_UNIT) {
             return 0;
         }
 
-        if (distance < FIFTY_OVER_DISTANCE_UNIT) {
-            return (int)((Math.ceil(additionalFareRateUnitBy(distance, false))) * 100);
-        }
-
-        int overfare = 0;
-
         if (distance > FIFTY_OVER_DISTANCE_UNIT) {
-            overfare += (int)((Math.ceil(additionalFareRateUnitBy(FIFTY_OVER_DISTANCE_UNIT, false)))
-                    * 100);
-
-            distance -= FIFTY_OVER_DISTANCE_UNIT;
-            overfare += (int)((Math.ceil(additionalFareRateUnitBy(distance, true))) * 100);
+            overfare += (int)(
+                    (Math.ceil(additionalFareRateUnitBy(distance - FIFTY_OVER_DISTANCE_UNIT, true)))
+                            * 100);
+            distance = FIFTY_OVER_DISTANCE_UNIT;
         }
+        overfare += (int)((Math.ceil(additionalFareRateUnitBy(distance, false))) * 100);
 
         return overfare;
     }

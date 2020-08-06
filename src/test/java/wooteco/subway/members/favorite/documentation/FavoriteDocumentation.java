@@ -111,12 +111,16 @@ public class FavoriteDocumentation extends Documentation {
                                         .description("지하철역 아이디"),
                                 fieldWithPath("[].source.name").type(JsonFieldType.STRING)
                                         .description("지하철역 이름"),
+                                fieldWithPath("[].source.createdDate").ignored(),
+                                fieldWithPath("[].source.modifiedDate").ignored(),
                                 fieldWithPath("[].target").type(JsonFieldType.OBJECT)
                                         .description("도착역"),
                                 fieldWithPath("[].target.id").type(JsonFieldType.NUMBER)
                                         .description("지하철역 아이디"),
                                 fieldWithPath("[].target.name").type(JsonFieldType.STRING)
-                                        .description("지하철역 이름")))).
+                                        .description("지하철역 이름"),
+                                fieldWithPath("[].target.createdDate").ignored(),
+                                fieldWithPath("[].target.modifiedDate").ignored()))).
                 extract();
     }
 

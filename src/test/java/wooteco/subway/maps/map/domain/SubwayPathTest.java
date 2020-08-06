@@ -19,7 +19,7 @@ class SubwayPathTest {
 
     @BeforeEach
     void setup() {
-        line3 = TestObjectUtils.createLine(3L, "3호선", "ORANGE");
+        line3 = TestObjectUtils.createLine(3L, "3호선", "ORANGE", 900);
         line3.addLineStation(new LineStation(1L, null, 0, 0));
         LineStation lineStation6 = new LineStation(4L, 1L, 1, 2);
         LineStation lineStation7 = new LineStation(3L, 4L, 50, 2);
