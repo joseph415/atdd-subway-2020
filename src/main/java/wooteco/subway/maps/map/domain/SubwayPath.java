@@ -1,11 +1,12 @@
 package wooteco.subway.maps.map.domain;
 
-import com.google.common.collect.Lists;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.google.common.collect.Lists;
+
 public class SubwayPath {
+    private static final double STANDARD_FARE = 1250d;
     private List<LineStationEdge> lineStationEdges;
 
     public SubwayPath(List<LineStationEdge> lineStationEdges) {
@@ -17,7 +18,8 @@ public class SubwayPath {
     }
 
     public List<Long> extractStationId() {
-        List<Long> stationIds = Lists.newArrayList(lineStationEdges.get(0).getLineStation().getPreStationId());
+        List<Long> stationIds = Lists.newArrayList(
+                lineStationEdges.get(0).getLineStation().getPreStationId());
         stationIds.addAll(lineStationEdges.stream()
                 .map(it -> it.getLineStation().getStationId())
                 .collect(Collectors.toList()));
@@ -33,7 +35,14 @@ public class SubwayPath {
         return lineStationEdges.stream().mapToInt(it -> it.getLineStation().getDistance()).sum();
     }
 
-    public double calculateFare() {
-        return 1250d;
+    public double calculateFare(int distance) {
+        return STANDARD_FARE;
+    }
+
+    private int calculateOverFare(int distance) {
+        if (distance == 0) {
+            return 0;
+        }
+        return (int)((Math.ceil((distance - 1) / 5) + 1) * 100);
     }
 }
