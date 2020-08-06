@@ -1,14 +1,15 @@
 package wooteco.subway.members.favorite.domain;
 
-import wooteco.subway.common.domain.BaseEntity;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import wooteco.subway.common.domain.BaseEntity;
+
 @Entity
-public class Favorite extends BaseEntity {
+public class
+Favorite extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
