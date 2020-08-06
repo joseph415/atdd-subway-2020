@@ -1,12 +1,12 @@
 package wooteco.subway.maps.map.dto;
 
-import wooteco.subway.maps.map.domain.SubwayPath;
-import wooteco.subway.maps.station.domain.Station;
-import wooteco.subway.maps.station.dto.StationResponse;
-
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import wooteco.subway.maps.map.domain.SubwayPath;
+import wooteco.subway.maps.station.domain.Station;
+import wooteco.subway.maps.station.dto.StationResponse;
 
 public class PathResponseAssembler {
     public static PathResponse assemble(SubwayPath subwayPath, Map<Long, Station> stations) {
@@ -15,7 +15,7 @@ public class PathResponseAssembler {
                 .collect(Collectors.toList());
 
         int distance = subwayPath.calculateDistance();
-        double fare = subwayPath.calculateFare();
+        double fare = subwayPath.calculateFare(distance);
 
         return new PathResponse(stationResponses, subwayPath.calculateDuration(), distance, fare);
     }

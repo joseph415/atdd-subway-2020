@@ -36,13 +36,17 @@ public class SubwayPath {
     }
 
     public double calculateFare(int distance) {
-        return STANDARD_FARE;
+        return STANDARD_FARE + calculateOverFare(distance);
     }
 
     private int calculateOverFare(int distance) {
         if (distance == 0) {
             return 0;
         }
-        return (int)((Math.ceil((distance - 1) / 5) + 1) * 100);
+        return (int)((Math.ceil(additionalFareUnitBy(distance))) * 100);
+    }
+
+    private int additionalFareUnitBy(int distance) {
+        return ((distance - 1) / 5) + 1;
     }
 }
