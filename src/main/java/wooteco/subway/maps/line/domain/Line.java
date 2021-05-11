@@ -17,18 +17,31 @@ public class Line extends BaseEntity {
     private LocalTime startTime;
     private LocalTime endTime;
     private int intervalTime;
+    private int extraFare;
     @Embedded
-    private LineStations lineStations = new LineStations();
+    private LineStations lineStations;
 
     public Line() {
     }
 
-    public Line(String name, String color, LocalTime startTime, LocalTime endTime, int intervalTime) {
+    private Line(Long id, String name, String color, LocalTime startTime, LocalTime endTime,
+            int intervalTime, int extraFare, LineStations lineStations) {
+        this.id = id;
         this.name = name;
         this.color = color;
         this.startTime = startTime;
         this.endTime = endTime;
         this.intervalTime = intervalTime;
+        this.extraFare = extraFare;
+        this.lineStations = lineStations;
+    }
+
+    public static Line of(String name, String color, LocalTime startTime, LocalTime endTime, int intervalTime) {
+        return new Line(null,name,color,startTime,endTime,intervalTime,0,new LineStations());
+    }
+
+    public static Line of(String name, String color, LocalTime startTime, LocalTime endTime, int intervalTime,int extraFare) {
+        return new Line(null,name,color,startTime,endTime,intervalTime,extraFare,new LineStations());
     }
 
     public void update(Line line) {
@@ -73,6 +86,10 @@ public class Line extends BaseEntity {
 
     public int getIntervalTime() {
         return intervalTime;
+    }
+
+    public int getExtraFare() {
+        return extraFare;
     }
 
     public LineStations getLineStations() {

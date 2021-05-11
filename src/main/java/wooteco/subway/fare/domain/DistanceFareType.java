@@ -24,7 +24,7 @@ public enum DistanceFareType {
         this.predicate = predicate;
     }
 
-    public static Double calculateFare(int distance) {
+    public static double calculateFare(int distance) {
         final DistanceFareType distanceType = Arrays.stream(DistanceFareType.values())
                 .filter(distanceFareType -> distanceFareType.predicate.test(distance))
                 .findFirst().orElseThrow(() -> new IllegalArgumentException("잘못된 distance"));

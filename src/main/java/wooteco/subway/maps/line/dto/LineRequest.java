@@ -43,6 +43,6 @@ public class LineRequest {
     }
 
     public Line toLine() {
-        return new Line(name, color, startTime, endTime, intervalTime);
+        return Line.of(name, color, startTime, endTime, intervalTime);
     }
 }

@@ -51,7 +51,6 @@ public class MapServiceTest {
 
         Line line1 = TestObjectUtils.createLine(1L, "2호선", "GREEN");
         line1.addLineStation(new LineStation(1L, null, 0, 0));
-        LineStation lineStation2 = new LineStation(2L, 1L, 2, 2);
         line1.addLineStation(new LineStation(2L, 1L, 2, 2));
 
         Line line2 = TestObjectUtils.createLine(2L, "신분당선", "RED");
