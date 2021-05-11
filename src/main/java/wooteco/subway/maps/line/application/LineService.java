@@ -34,6 +34,10 @@ public class LineService {
         return lineRepository.findAll();
     }
 
+    public List<Line> findLinesIn(List<Long> ids){
+        return lineRepository.findLinesIns(ids);
+    }
+
     public Line findLineById(Long id) {
         return lineRepository.findById(id).orElseThrow(RuntimeException::new);
     }
