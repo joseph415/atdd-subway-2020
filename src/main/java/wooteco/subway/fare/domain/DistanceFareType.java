@@ -1,17 +1,17 @@
 package wooteco.subway.fare.domain;
 
 import java.util.Arrays;
-import java.util.function.Function;
+import java.util.function.DoubleFunction;
 import java.util.function.Predicate;
 
 public enum DistanceFareType {
-    DEFAULT(distance -> Constants.DEFAULT_FARE, distance -> distance <= 10),
-    TEN_TO_FIFTY(distance -> Constants.DEFAULT_FARE + Math.floor((distance - 10) / 5.0) * 100.0,
-            distance -> distance > 10 && distance <= 50),
+    DEFAULT(distance -> Constants.DEFAULT_FARE, distance -> distance <= 10.0),
+    TEN_TO_FIFTY(distance -> Constants.DEFAULT_FARE + Math.floor((distance - 10.0) / 5.0) * 100.0,
+            distance -> distance > 10.0 && distance <= 50.0),
     OVER_FIFTY(distance -> Constants.DEFAULT_FARE + Constants.TEN_TO_FIFTY_FULL_FARE
-            + Math.floor((distance - 50) / 8.0) * 100.0, distance -> distance > 50);
+            + Math.floor((distance - 50.0) / 8.0) * 100.0, distance -> distance > 50.0);
 
-    private final Function<Integer, Double> farePerDistance;
+    private final DoubleFunction<Double> farePerDistance;
     private final Predicate<Integer> predicate;
 
     private static class Constants {
@@ -19,7 +19,7 @@ public enum DistanceFareType {
         public static final double TEN_TO_FIFTY_FULL_FARE = 800.0;
     }
 
-    DistanceFareType(Function<Integer, Double> farePerDistance, Predicate<Integer> predicate) {
+    DistanceFareType(DoubleFunction<Double> farePerDistance, Predicate<Integer> predicate) {
         this.farePerDistance = farePerDistance;
         this.predicate = predicate;
     }
