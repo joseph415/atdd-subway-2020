@@ -1,13 +1,12 @@
 package wooteco.subway.members.member.domain;
 
-
 import wooteco.security.core.userdetails.UserDetails;
 
-public class LoginMember implements UserDetails {
-    private Long id;
-    private String email;
-    private String password;
-    private Integer age;
+public class LoginMember implements UserDetails, CurrentMember {
+    private final Long id;
+    private final String email;
+    private final String password;
+    private final Integer age;
 
     public LoginMember(Long id, String email, String password, Integer age) {
         this.id = id;
@@ -18,6 +17,11 @@ public class LoginMember implements UserDetails {
 
     public boolean checkPassword(String password) {
         return this.password.equals(password);
+    }
+
+    @Override
+    public boolean isLogin() {
+        return true;
     }
 
     public Long getId() {
@@ -48,7 +52,7 @@ public class LoginMember implements UserDetails {
 
     @Override
     public boolean checkCredentials(Object credentials) {
-        String password = (String) credentials;
+        String password = (String)credentials;
         if (this.password == null || password == null) {
             return false;
         }
@@ -56,16 +60,4 @@ public class LoginMember implements UserDetails {
         return this.password.equals(password);
     }
 
-    public int discountFare(int fare) {
-        if (age == 0 || age > 20) {
-            return fare;
-        }
-        if (age > 13) {
-            return (fare - 350) * 80 / 100;
-        }
-        if (age > 6) {
-            return (fare - 350) * 50 / 100;
-        }
-        return 0;
-    }
 }

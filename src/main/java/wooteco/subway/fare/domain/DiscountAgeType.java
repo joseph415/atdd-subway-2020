@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import wooteco.subway.members.member.domain.LoginMember;
+import wooteco.subway.members.member.domain.CurrentMember;
 
 public enum DiscountAgeType {
     BABY(fare -> BigDecimal.valueOf(0), age -> age > 0 && age < 6),
@@ -29,7 +29,7 @@ public enum DiscountAgeType {
         this.predicate = predicate;
     }
 
-    public static int discountByAge(LoginMember loginMember, int fare) {
+    public static int discountByAge(CurrentMember loginMember, int fare) {
         final DiscountAgeType discountType = Arrays.stream(DiscountAgeType.values())
                 .filter(discountAgeType -> discountAgeType.predicate.test(loginMember.getAge()))
                 .findFirst()

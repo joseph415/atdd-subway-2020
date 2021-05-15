@@ -6,6 +6,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import wooteco.subway.maps.line.domain.Line;
 import wooteco.subway.maps.station.domain.Station;
+import wooteco.subway.members.member.domain.EmptyMember;
 import wooteco.subway.members.member.domain.LoginMember;
 
 public class TestObjectUtils {
@@ -31,5 +32,9 @@ public class TestObjectUtils {
     public static LoginMember createLoginMember(Long id, String email, String password,
             Integer age) {
         return new LoginMember(id, email, password, age);
+    }
+
+    public static EmptyMember createEmptyMember() {
+        return new EmptyMember();
     }
 }

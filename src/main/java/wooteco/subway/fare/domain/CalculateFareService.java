@@ -4,13 +4,16 @@ import java.util.List;
 
 import wooteco.subway.fare.infra.LineFareRuleImpl;
 import wooteco.subway.maps.line.domain.Line;
-import wooteco.subway.members.member.domain.LoginMember;
+import wooteco.subway.members.member.domain.CurrentMember;
 
 public class CalculateFareService {
-    public int calculateFare(LoginMember loginMember, List<Line> lines, int distance) {
+    public int calculateFare(CurrentMember currentMember, List<Line> lines, int distance) {
         final LineFareRule lineFareRule = new LineFareRuleImpl();
         final int fare = DistanceFareType.calculateFare(distance) + lineFareRule.maxLineFare(lines);
 
-        return DiscountAgeType.discountByAge(loginMember, fare);
+        if (currentMember.isLogin()) {
+            return DiscountAgeType.discountByAge(currentMember, fare);
+        }
+        return fare;
     }
 }
