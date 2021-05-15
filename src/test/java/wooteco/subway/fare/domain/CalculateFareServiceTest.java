@@ -15,9 +15,9 @@ import wooteco.subway.members.member.domain.LoginMember;
 
 class CalculateFareServiceTest {
     @DisplayName("요금을 계산하는 서비스 기능을 제공한다.")
-    @CsvSource(value = {"5,0.0", "10,1350.0", "13,1890.0", "20,3050.0"})
+    @CsvSource(value = {"5,0", "10,1350", "13,1890", "20,3050"})
     @ParameterizedTest
-    void Should_givenLineAndMember_calculateFare(Integer age, double expected) {
+    void Should_givenLineAndMember_calculateFare(Integer age, int expected) {
         // given
         LoginMember loginMember = TestObjectUtils.createLoginMember(1L, "j@a.com", "1234", age);
         Line line1 = TestObjectUtils.createLineExtraFare(1L, "2호선", "GREEN", 500);
@@ -27,8 +27,8 @@ class CalculateFareServiceTest {
 
         CalculateFareService calculateFareService = new CalculateFareService();
         // when
-        double fare = calculateFareService.calculateFare(loginMember, lines, distance);
+        int fare = calculateFareService.calculateFare(loginMember, lines, distance);
         // then
-        assertThat(expected).isEqualTo(fare);
+        assertThat(fare).isEqualTo(expected);
     }
 }

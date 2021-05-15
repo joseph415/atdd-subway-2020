@@ -7,7 +7,7 @@ import wooteco.subway.maps.line.domain.Line;
 
 public class LineFareRuleImpl implements LineFareRule {
     @Override
-    public double maxLineFare(List<Line> lines) {
+    public int maxLineFare(List<Line> lines) {
         return lines.stream()
                 .map(Line::getExtraFare)
                 .max(Integer::compare)

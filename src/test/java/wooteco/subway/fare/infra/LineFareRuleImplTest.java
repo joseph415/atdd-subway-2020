@@ -22,10 +22,11 @@ class LineFareRuleImplTest {
         int distance = 10;
         // when
         LineFareRule lineFareRule = new LineFareRuleImpl();
-        final double farePerDistance = DistanceFareType.calculateFare(distance);
-        final double maxLineFare = lineFareRule.maxLineFare(Collections.singletonList(line1));
+        final int farePerDistance = DistanceFareType.calculateFare(distance);
+        final int maxLineFare = lineFareRule.maxLineFare(Collections.singletonList(line1));
+        int expect = farePerDistance + maxLineFare;
         // then
-        assertThat(1750.0).isEqualTo(farePerDistance + maxLineFare);
+        assertThat(expect).isEqualTo(1750);
     }
 
     @DisplayName("추가요금 라인이 여러개일 경우 최대 추가요금만 부가")
@@ -37,10 +38,11 @@ class LineFareRuleImplTest {
         int distance = 58;
         // when
         LineFareRule lineFareRule = new LineFareRuleImpl();
-        final double farePerDistance = DistanceFareType.calculateFare(distance);
-        final double maxLineFare = lineFareRule.maxLineFare(Arrays.asList(line1, line2));
+        final int farePerDistance = DistanceFareType.calculateFare(distance);
+        final int maxLineFare = lineFareRule.maxLineFare(Arrays.asList(line1, line2));
+        int expect = farePerDistance + maxLineFare;
         // then
-        assertThat(3050.0).isEqualTo(farePerDistance + maxLineFare);
+        assertThat(expect).isEqualTo(3050);
     }
 
 }

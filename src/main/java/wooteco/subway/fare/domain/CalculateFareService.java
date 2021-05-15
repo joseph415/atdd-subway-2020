@@ -7,10 +7,9 @@ import wooteco.subway.maps.line.domain.Line;
 import wooteco.subway.members.member.domain.LoginMember;
 
 public class CalculateFareService {
-    public double calculateFare(LoginMember loginMember, List<Line> lines, int distance) {
+    public int calculateFare(LoginMember loginMember, List<Line> lines, int distance) {
         final LineFareRule lineFareRule = new LineFareRuleImpl();
-        final double fare =
-                DistanceFareType.calculateFare(distance) + lineFareRule.maxLineFare(lines);
+        final int fare = DistanceFareType.calculateFare(distance) + lineFareRule.maxLineFare(lines);
 
         return DiscountAgeType.discountByAge(loginMember, fare);
     }
